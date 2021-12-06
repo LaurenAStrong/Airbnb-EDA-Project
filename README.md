@@ -41,7 +41,6 @@ users.shape
 Before beginning any data process, it is imperative to check for data integrity. By checking the shape of the datasets, we see that the train and test data was successfully combined to join into the users dataset. 
 
 Now, we will check if there are any duplicate rows in the users dataset.
-
 ```python
  users[users.duplicated(keep = False)]
 ```
@@ -53,6 +52,23 @@ There were no duplicate rows. Now, we check if there are multiple different entr
 ```
 
 The data shows that there are no users who booked twice in this dataset.
+
+The next step we perform is to calculate the number of null entries with a `Python` loop over the columns.
+
+```python
+ for i in users.columns:
+    sum_null = users[i].isnull().sum()
+    if sum_null != 0:
+        print(i + " has {} null values.".format(sum_null))
+        print()
+```
+
+The `print` output shows:
+
+* date_first_booking has 186639 null values.
+* age has 116866 null values.
+* first_affiliate_tracked has 6085 null values.
+* country_destination has 62096 null values.
 
 
 
