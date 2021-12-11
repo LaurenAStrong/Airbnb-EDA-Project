@@ -163,7 +163,8 @@ plt.ylabel('Count')
 plt.title('Country Destination')
 order2 = users['country_destination'].value_counts()
 ```
-![Age boxplot Airbnb Project User Booking Data](https://user-images.githubusercontent.com/91219409/145685059-d4ba2511-ffe3-469a-acf6-862376243539.png)
+
+![Better plot for desination country](https://user-images.githubusercontent.com/91219409/145686254-2e12d016-05fb-4566-96b6-7420769f41f8.png)
 
 
 Time first active: Steady growth until 2014, then lots of growth
