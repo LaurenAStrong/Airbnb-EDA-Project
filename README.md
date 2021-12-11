@@ -146,9 +146,9 @@ for categorical_feature in categorical_features:
 Age boxplot: Outliers have been removed
 ```python
 sns.boxplot(data=airbnb_df.age, color='#FD5C64')
+plt.title('Age Distribution')
 ```
-![Age boxplot 2](https://user-images.githubusercontent.com/91219409/145687298-9d1bd963-437d-474e-adb3-7b569324e2d6.png)
-
+![Age Distribution Updated with title](https://user-images.githubusercontent.com/91219409/145687398-036af343-4879-418c-a8e1-04f26eba457a.png)
 
 
 Age dist plot:
@@ -201,9 +201,13 @@ users['date_first_active'] = pd.to_datetime((users.timestamp_first_active // 100
 
 Time first active: Steady growth until 2014, then lots of growth
 ```python
-sns.histplot(users.timestamp_first_active)
+sns.histplot(users.timestamp_first_active, color='#FD5C64')
+plt.xlabel('Timestamp First Active')
+plt.ylabel('Count')
+plt.title('First Active Over Time')
 ```
-![Histogram of users first active](https://user-images.githubusercontent.com/91219409/145685242-bcc8db4c-ddf4-4ae9-8168-c8a27908e847.png)
+![First Active Over Time](https://user-images.githubusercontent.com/91219409/145687351-adb6b745-c5bf-4ff2-b4e6-98516e2aed88.png)
+
 
 ```python
 users.date_account_created.value_counts().plot(kind='line', linewidth=1.2, color='#FD5C64')
