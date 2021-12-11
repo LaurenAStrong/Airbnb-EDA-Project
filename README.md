@@ -106,3 +106,39 @@ The `print` output shows:
 * We will later take a look at the different browser and device types to see which had the best and lowest conversion rates for booking.
 * We will also take a look at which languages and countries of destination are most and least common. 
 * Date of first booking has a higher-than-average missing value count, so that will need to be further explored. My hypothesis is that most of those are because users entered into the signup flow, but did not book, thus they did not have a date of first booking to report.
+
+# Data Cleaning Needed:
+```python
+users.gender.value_counts()
+```
+* -unknown-    129480
+* FEMALE        77524
+* MALE          68209
+* OTHER           334
+
+
+## Univariate Analysis – Insights
+
+
+Replace outlier ages with NaN. 
+```python
+airbnb_df.loc[airbnb_df.age > 100, 'age'] = np.nan
+airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
+```
+Average age is 34:
+```python
+sns.boxplot(data=airbnb_df.age)
+```
+
+
+
+
+## Bivariate Analysis – Insights
+
+
+
+## Multivariate Analysis – Insights
+
+
+
+
