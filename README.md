@@ -123,6 +123,24 @@ airbnb_df.loc[airbnb_df.age > 100, 'age'] = np.nan
 airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
 ```
 
+Convert to categorical for plotting:
+```python
+categorical_features = [
+    'affiliate_channel',
+    'affiliate_provider',
+    'first_affiliate_tracked',
+    'first_browser',
+    'first_device_type',
+    'gender',
+    'language',
+    'signup_app',
+    'signup_method',
+    'signup_flow'
+]
+
+for categorical_feature in categorical_features:
+    users[categorical_feature] = users[categorical_feature].astype('category')
+```
 
 ## Univariate Analysis – Insights
 Age boxplot: Outliers have been removed
@@ -139,7 +157,6 @@ plt.xlabel('Age')
 sns.despine()
 ```
 ![Age dist plot](https://user-images.githubusercontent.com/91219409/145686502-72239c18-3a9e-4b24-ae48-ebc9beaf9037.png)
-
 
 
 Gender: more females than males. Over 30% unknown gender. 
@@ -175,7 +192,11 @@ order2 = users['country_destination'].value_counts()
 
 
 Convert time and date columns into appropriate format:
-
+```python
+users['date_account_created'] = pd.to_datetime(users['date_account_created'])
+users['date_first_booking'] = pd.to_datetime(users['date_first_booking'])
+users['date_first_active'] = pd.to_datetime((users.timestamp_first_active // 1000000), format='%Y%m%d')
+```
 
 Time first active: Steady growth until 2014, then lots of growth
 ```python
@@ -185,6 +206,8 @@ sns.histplot(users.timestamp_first_active)
 
 
 Devices used:
+
+
 
 
 
@@ -200,5 +223,10 @@ Device type - Destination plot:
 
 
 ## Multivariate Analysis – Insights
+
+
+
+
+
 
 
