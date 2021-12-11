@@ -125,12 +125,20 @@ airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
 
 
 ## Univariate Analysis – Insights
-
-Mean age is 36:
+Age boxplot: Outliers have been removed
 ```python
 sns.boxplot(data=users.age)
 ```
 ![Users Age Boxplot](https://user-images.githubusercontent.com/91219409/145685371-0d2f20db-6aa2-4013-b77a-9de78b0d33eb.png)
+
+
+Age dist plot:
+```python
+sns.distplot(users.age.dropna(), color='#FD5C64')
+plt.xlabel('Age')
+sns.despine()
+```
+![Age dist plot](https://user-images.githubusercontent.com/91219409/145686502-72239c18-3a9e-4b24-ae48-ebc9beaf9037.png)
 
 
 
@@ -149,7 +157,7 @@ for i in range(order2.shape[0]):
     strt='{:0.1f}%'.format(100*count / users.shape[0])
     plt.text(i,count+1000,strt,ha='center')
 ```
-![Gender Distribution Airbnb Project](https://user-images.githubusercontent.com/91219409/145685009-9238ad81-bae8-4c11-96c9-5396bc1ffeed.png)
+![Gender counts](https://user-images.githubusercontent.com/91219409/145686373-fbd5a757-fd92-4784-8b5c-27276e1cc60f.png)
 
 
 Country of destination:
@@ -163,8 +171,10 @@ plt.ylabel('Count')
 plt.title('Country Destination')
 order2 = users['country_destination'].value_counts()
 ```
-
 ![Better plot for desination country](https://user-images.githubusercontent.com/91219409/145686254-2e12d016-05fb-4566-96b6-7420769f41f8.png)
+
+
+Convert time and date columns into appropriate format:
 
 
 Time first active: Steady growth until 2014, then lots of growth
@@ -174,8 +184,18 @@ sns.histplot(users.timestamp_first_active)
 ![Histogram of users first active](https://user-images.githubusercontent.com/91219409/145685242-bcc8db4c-ddf4-4ae9-8168-c8a27908e847.png)
 
 
+Devices used:
+
+
 
 ## Bivariate Analysis – Insights
+Older versus younger - Destination plot:
+
+
+Gender - Destination plot:
+
+
+Device type - Destination plot:
 
 
 
