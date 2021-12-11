@@ -108,28 +108,61 @@ The `print` output shows:
 * Date of first booking has a higher-than-average missing value count, so that will need to be further explored. My hypothesis is that most of those are because users entered into the signup flow, but did not book, thus they did not have a date of first booking to report.
 
 # Data Cleaning Needed:
+
+
+Clean gender:
 ```python
+users.loc[users.gender == 'OTHER', 'gender'] = np.nan
 users.gender.value_counts()
+users.loc[users.gender == '-unknown-', 'gender'] = np.nan
 ```
-* -unknown-    129480
-* FEMALE        77524
-* MALE          68209
-* OTHER           334
-
-
-## Univariate Analysis – Insights
-
-
+Clean age:
 Replace outlier ages with NaN. 
 ```python
 airbnb_df.loc[airbnb_df.age > 100, 'age'] = np.nan
 airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
 ```
+
+
+## Univariate Analysis – Insights
+
 Average age is 34:
 ```python
 sns.boxplot(data=airbnb_df.age)
 ```
 ![Age boxplot Airbnb Project User Booking Data](https://user-images.githubusercontent.com/91219409/145684781-9ab5db9e-e2c6-4e00-9727-2144f065150f.png)
+
+
+Gender: more females than males. Over 30% unknown gender. 
+```python
+plt.figure(figsize=(14,8))
+order1 = users['gender'].value_counts().index
+sns.countplot(data = users, x = 'gender', order = order1, color = sns.color_palette()[0])
+plt.xlabel('Gender')
+plt.ylabel('Count')
+plt.title('Gender Distribution')
+order2 = users['gender'].value_counts()
+
+for i in range(order2.shape[0]):
+    count = order2[i]
+    strt='{:0.1f}%'.format(100*count / users.shape[0])
+    plt.text(i,count+1000,strt,ha='center')
+```
+![Gender Distribution Airbnb Project](https://user-images.githubusercontent.com/91219409/145685009-9238ad81-bae8-4c11-96c9-5396bc1ffeed.png)
+
+
+Country of destination:
+```python
+Country: Mostly unknown, next highest is USA.
+plt.figure(figsize=(14,8))
+order1 = users['country_destination'].value_counts().index
+sns.countplot(data = users, x = 'country_destination', order = order1, color = sns.color_palette()[0])
+plt.xlabel('Country Destination')
+plt.ylabel('Count')
+plt.title('Country Destination')
+order2 = users['country_destination'].value_counts()
+```
+![Age boxplot Airbnb Project User Booking Data](https://user-images.githubusercontent.com/91219409/145685059-d4ba2511-ffe3-469a-acf6-862376243539.png)
 
 
 
