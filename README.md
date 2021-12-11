@@ -42,13 +42,13 @@ Before beginning any data process, it is imperative to check for data integrity.
 
 Now, we will check if there are any duplicate rows in the users dataset.
 ```python
- users[users.duplicated(keep = False)]
+users.duplicated().sum()
 ```
 
 There were no duplicate rows. Now, we check if there are multiple different entries under the same Airbnb user id:
 
 ```python
- users[users.duplicated(['id'],keep = False)]
+users.id.duplicated().sum()
 ```
 
 The data shows that there are no users who booked twice in this dataset.
