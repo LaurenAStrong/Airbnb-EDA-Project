@@ -129,7 +129,7 @@ Average age is 34:
 ```python
 sns.boxplot(data=airbnb_df.age)
 ```
-![description](./figs/Age boxplot Airbnb Project User Booking Data.png)
+![description] (./figs/Age boxplot Airbnb Project User Booking Data.png)
 
 
 
