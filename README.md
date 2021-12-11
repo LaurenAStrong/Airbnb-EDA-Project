@@ -165,6 +165,13 @@ order2 = users['country_destination'].value_counts()
 ![Age boxplot Airbnb Project User Booking Data](https://user-images.githubusercontent.com/91219409/145685059-d4ba2511-ffe3-469a-acf6-862376243539.png)
 
 
+Time first active: Steady growth until 2014, then lots of growth
+```python
+sns.histplot(users.timestamp_first_active)
+```
+![Histogram of users first active](https://user-images.githubusercontent.com/91219409/145685242-bcc8db4c-ddf4-4ae9-8168-c8a27908e847.png)
+
+
 
 ## Bivariate Analysis – Insights
 
