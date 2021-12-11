@@ -204,9 +204,18 @@ sns.histplot(users.timestamp_first_active)
 ```
 ![Histogram of users first active](https://user-images.githubusercontent.com/91219409/145685242-bcc8db4c-ddf4-4ae9-8168-c8a27908e847.png)
 
+```python
+users.date_account_created.value_counts().plot(kind='line', linewidth=1.2, color='#FD5C64')
+```
+![Date Account Created](https://user-images.githubusercontent.com/91219409/145687169-ef39b7b9-a5f6-42ef-a5ae-4e4237d7e9c6.png)
+
 
 Devices used:
-
+```python
+sns.countplot(x='first_device_type', data=users, color = '#FD5C64')
+plt.xticks(rotation=-45)
+```
+![By Device Type](https://user-images.githubusercontent.com/91219409/145687244-213b0a4b-ef1f-44a2-8f09-a130e94a883a.png)
 
 
 
