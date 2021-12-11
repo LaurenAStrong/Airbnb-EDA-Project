@@ -145,9 +145,10 @@ for categorical_feature in categorical_features:
 ## Univariate Analysis – Insights
 Age boxplot: Outliers have been removed
 ```python
-sns.boxplot(data=users.age)
+sns.boxplot(data=airbnb_df.age, color='#FD5C64')
 ```
-![Users Age Boxplot](https://user-images.githubusercontent.com/91219409/145685371-0d2f20db-6aa2-4013-b77a-9de78b0d33eb.png)
+![Age boxplot 2](https://user-images.githubusercontent.com/91219409/145687298-9d1bd963-437d-474e-adb3-7b569324e2d6.png)
+
 
 
 Age dist plot:
