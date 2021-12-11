@@ -240,7 +240,25 @@ Device type - Destination plot:
 
 
 
-## Multivariate Analysis – Insights
+## Conversion Rate and Channel Analyses
+Now analyses on signup flows and conversion for marketing.
+
+
+Signup methods compared to number of bookings:
+
+
+bold - recommendation to marketing:
+
+
+
+Age who booked more:
+
+
+Gender who booked more:
+
+
+Day of week with most bookings, and least bookings:
+
 
 
 
