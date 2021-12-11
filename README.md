@@ -126,7 +126,7 @@ airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
 
 ## Univariate Analysis – Insights
 
-Average age is 34:
+Mean age is 36:
 ```python
 sns.boxplot(data=users.age)
 ```
