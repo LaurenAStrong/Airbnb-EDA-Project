@@ -128,9 +128,10 @@ airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
 
 Average age is 34:
 ```python
-sns.boxplot(data=airbnb_df.age)
+sns.boxplot(data=users.age)
 ```
-![Age boxplot Airbnb Project User Booking Data](https://user-images.githubusercontent.com/91219409/145684781-9ab5db9e-e2c6-4e00-9727-2144f065150f.png)
+![Users Age Boxplot](https://user-images.githubusercontent.com/91219409/145685371-0d2f20db-6aa2-4013-b77a-9de78b0d33eb.png)
+
 
 
 Gender: more females than males. Over 30% unknown gender. 
