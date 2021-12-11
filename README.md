@@ -217,10 +217,14 @@ users.date_account_created.value_counts().plot(kind='line', linewidth=1.2, color
 
 Devices used:
 ```python
-sns.countplot(x='first_device_type', data=users, color = '#FD5C64')
+order1 = users['first_device_type'].value_counts().index
+sns.countplot(x='first_device_type', data=users,  order = order1, color = '#FD5C64')
 plt.xticks(rotation=-45)
+plt.xlabel('Device Type')
+plt.ylabel('Count')
+plt.title('Device Type Counts')
 ```
-![By Device Type](https://user-images.githubusercontent.com/91219409/145687244-213b0a4b-ef1f-44a2-8f09-a130e94a883a.png)
+![Device Types By Counts Ordered](https://user-images.githubusercontent.com/91219409/145687490-7d5e07e2-2afc-40b4-bedf-bbdaf84bbf31.png)
 
 
 
