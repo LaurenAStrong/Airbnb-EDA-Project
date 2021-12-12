@@ -1,3 +1,6 @@
+<img width="800" alt="Screen Shot 2021-12-12 at 10 23 18 AM" src="https://user-images.githubusercontent.com/91219409/145724652-658fca0b-4fab-4c85-84b2-9d6382d059e0.png">
+
+
 # Airbnb User Bookings Analysis
 
 This repository documents the process of extracting insights from multiple Airbnb datasets, joining them on a common key, cleaning them, analyzing for insights, and presenting the results with graphs and business-impactful summaries.
