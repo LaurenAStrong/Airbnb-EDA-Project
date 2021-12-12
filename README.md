@@ -56,8 +56,27 @@ The data shows that there are no users who booked twice in this dataset.
 Analyze age outliers:
 ```python
 users[users.age > 100]['age'].describe()
+```
+count    2690.000000
+mean      690.957249
+std       877.927570
+min       101.000000
+25%       105.000000
+50%       105.000000
+75%      2014.000000
+max      2014.000000
+
+```python
 users[users.age <18]['age'].describe()
 ```
+count    188.000000
+mean      12.718085
+std        5.764569
+min        1.000000
+25%        5.000000
+50%       16.000000
+75%       17.000000
+max       17.000000
 
 The next step we perform is to calculate the number of null entries with a `Python` loop over the columns.
 
