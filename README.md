@@ -164,7 +164,7 @@ Gender: more females than males. Over 30% unknown gender.
 ```python
 plt.figure(figsize=(14,8))
 order1 = users['gender'].value_counts().index
-sns.countplot(data = users, x = 'gender', order = order1, color = sns.color_palette()[0])
+sns.countplot(data = users, x = 'gender', order = order1, color = '#FD5C64')
 plt.xlabel('Gender')
 plt.ylabel('Count')
 plt.title('Gender Distribution')
@@ -230,7 +230,39 @@ plt.title('Device Type Counts')
 
 
 ## Bivariate Analysis – Insights
-Older versus younger - Destination plot:
+
+Device type - Destination plot:
+```python
+device1_destinations = users.loc[users['first_device_type'] == 'Mac Desktop', 'country_destination'].value_counts()
+device2_destinations = users.loc[users['first_device_type'] == 'Windows Desktop', 'country_destination'].value_counts()
+device1_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Mac Desktop', rot=0)
+device2_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Windows Desktop', rot=0)
+Bar width
+width = 0.4
+plt.legend()
+plt.xlabel('Destination Country')
+plt.ylabel('Device Type Counts')
+plt.show()
+```
+![Device Type by Country Plot](https://user-images.githubusercontent.com/91219409/145722597-fecaf779-c9c6-40b9-8d45-ba48b86118a7.png)
+
+
+Age - Destination plot:
+```python
+age = 50
+less_than_50 = sum(users.loc[users['age'] < age, 'country_destination'].value_counts())
+greater_than_50 = sum(users.loc[users['age'] > age, 'country_destination'].value_counts())
+younger_destinations = users.loc[users['age'] < age, 'country_destination'].value_counts() / less_than_50 * 100
+older_destinations = users.loc[users['age'] > age, 'country_destination'].value_counts() / greater_than_50 * 100
+younger_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Age Less Than 50', rot=0)
+older_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Age Greater Than 50', rot=0)
+plt.legend()
+plt.xlabel('Destination Country')
+plt.ylabel('Percentage')
+sns.despine()
+plt.show()
+```
+![Age versus destination plot](https://user-images.githubusercontent.com/91219409/145722776-f7fcf528-1976-423c-b593-bae1eaac1f7c.png)
 
 
 Gender - Destination plot:
@@ -248,12 +280,6 @@ plt.ylabel('Percentage')
 plt.show()
 ```
 ![Destination by gender](https://user-images.githubusercontent.com/91219409/145722202-0751eaf7-b0c6-4131-86a6-5fd13d6c38b5.png)
-
-
-Device type - Destination plot:
-
-
-
 
 
 
