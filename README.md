@@ -311,6 +311,9 @@ plt.show()
 ![Destination by gender](https://user-images.githubusercontent.com/91219409/145722202-0751eaf7-b0c6-4131-86a6-5fd13d6c38b5.png)
 
 
+
+
+
 # Part 2 - Metrics Analyses:
 
 <img width="800" alt="Screen Shot 2021-12-12 at 9 46 37 AM" src="https://user-images.githubusercontent.com/91219409/145723448-154ab13b-9004-44d9-a374-28ef76f7a87e.png">
