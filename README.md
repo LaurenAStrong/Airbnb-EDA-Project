@@ -307,6 +307,15 @@ plt.show()
 ![Destination by gender](https://user-images.githubusercontent.com/91219409/145722202-0751eaf7-b0c6-4131-86a6-5fd13d6c38b5.png)
 
 
+# Part 2 - Metrics Analyses:
+Business Summary
+<img width="1050" alt="Screen Shot 2021-12-12 at 9 45 10 AM" src="https://user-images.githubusercontent.com/91219409/145723412-10313cdb-005f-4417-a28e-9d78bba70d03.png">
+
+
+
+Metrics Summary
+<img width="1053" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
+
 
 
 ## Conversion Rate and Channel Analyses
