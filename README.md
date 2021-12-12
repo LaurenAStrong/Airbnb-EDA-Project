@@ -309,7 +309,7 @@ plt.show()
 
 # Part 2 - Metrics Analyses:
 
-<img width="800" alt="Screen Shot 2021-12-12 at 9 45 10 AM" src="https://user-images.githubusercontent.com/91219409/145723412-10313cdb-005f-4417-a28e-9d78bba70d03.png">
+<img width="800" alt="Screen Shot 2021-12-12 at 9 46 37 AM" src="https://user-images.githubusercontent.com/91219409/145723448-154ab13b-9004-44d9-a374-28ef76f7a87e.png">
 <img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
 
 
