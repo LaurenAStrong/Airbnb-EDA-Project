@@ -53,6 +53,12 @@ users.id.duplicated().sum()
 
 The data shows that there are no users who booked twice in this dataset.
 
+Analyze age outliers:
+```python
+users[users.age > 100]['age'].describe()
+users[users.age <18]['age'].describe()
+```
+
 The next step we perform is to calculate the number of null entries with a `Python` loop over the columns.
 
 ```python
