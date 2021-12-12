@@ -234,9 +234,27 @@ Older versus younger - Destination plot:
 
 
 Gender - Destination plot:
+```python
+women = sum(users['gender'] == 'FEMALE')
+men = sum(users['gender'] == 'MALE')
+female_destinations = users.loc[users['gender'] == 'FEMALE', 'country_destination'].value_counts() / women * 100
+male_destinations = users.loc[users['gender'] == 'MALE', 'country_destination'].value_counts() / men * 100
+width = 0.4
+male_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Male', rot=0)
+female_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Female', rot=0)
+plt.legend()
+plt.xlabel('Destination Country')
+plt.ylabel('Percentage')
+plt.show()
+```
+![Destination by gender](https://user-images.githubusercontent.com/91219409/145722202-0751eaf7-b0c6-4131-86a6-5fd13d6c38b5.png)
 
 
 Device type - Destination plot:
+
+
+
+
 
 
 
