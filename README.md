@@ -219,12 +219,12 @@ Devices used:
 ```python
 order1 = users['first_device_type'].value_counts().index
 sns.countplot(x='first_device_type', data=users,  order = order1, color = '#FD5C64')
-plt.xticks(rotation=-45)
+plt.xticks(rotation=-65)
 plt.xlabel('Device Type')
 plt.ylabel('Count')
 plt.title('Device Type Counts')
 ```
-![Device Types By Counts Ordered](https://user-images.githubusercontent.com/91219409/145687490-7d5e07e2-2afc-40b4-bedf-bbdaf84bbf31.png)
+![Device Types Plot corrected](https://user-images.githubusercontent.com/91219409/145721641-6b317916-6430-42d1-9491-75a93fab9974.png)
 
 
 
@@ -258,6 +258,7 @@ Gender who booked more:
 
 
 Day of week with most bookings, and least bookings:
+
 
 
 
