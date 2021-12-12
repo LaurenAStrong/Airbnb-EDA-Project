@@ -313,30 +313,5 @@ plt.show()
 <img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
 
 
-## Conversion Rate and Channel Analyses
-Now analyses on signup flows and conversion for marketing.
-
-
-Signup methods compared to number of bookings:
-
-
-bold - recommendation to marketing:
-
-
-
-Age who booked more:
-
-
-Gender who booked more:
-
-
-Day of week with most bookings, and least bookings:
-
-
-
-
-
-
-
 
 
