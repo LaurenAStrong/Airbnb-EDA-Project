@@ -217,7 +217,7 @@ In our country analysis, we see that most folks listed “NDF”/unknown as thei
 ```python
 plt.figure(figsize=(14,8))
 order1 = users['country_destination'].value_counts().index
-sns.countplot(data = users, x = 'country_destination', order = order1, color = sns.color_palette()[0])
+sns.countplot(data = users, x = 'country_destination', order = order1, color = '#FD5C64')
 plt.xlabel('Country Destination')
 plt.ylabel('Count')
 plt.title('Country Destination')
@@ -325,6 +325,6 @@ plt.show()
 
 # Metrics Analyses:
 
-<img width="800" alt="Screen Shot 2021-12-12 at 9 46 37 AM" src="https://user-images.githubusercontent.com/91219409/145723448-154ab13b-9004-44d9-a374-28ef76f7a87e.png">
+<img width="800" alt="Screen Shot 2021-12-12 at 4 23 52 PM" src="https://user-images.githubusercontent.com/91219409/145735834-03ae22d6-0b06-4399-a30d-3205d1202688.png">
 <img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
 
