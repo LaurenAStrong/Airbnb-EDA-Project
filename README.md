@@ -325,8 +325,6 @@ plt.show()
 # Metrics Analyses:
 
 <img width="800" alt="Screen Shot 2021-12-12 at 4 23 52 PM" src="https://user-images.githubusercontent.com/91219409/145735834-03ae22d6-0b06-4399-a30d-3205d1202688.png">
-<img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
-
 
 Contact Method Chart:
 
