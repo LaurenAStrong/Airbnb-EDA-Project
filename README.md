@@ -340,16 +340,22 @@ sns.despine()
 ```
 ![Contact method plot](https://user-images.githubusercontent.com/91219409/145860282-7cc1e7ea-7b4e-464a-8714-5607515ce658.png)
 
+The "Contact Me" feature (where a user first messages a host and engages in messaging before deciding to book later) had 911 successful bookings out of 12828 uses for a conversion rate of 7.10%. The Book It, where a user ) had 3983 successful bookings out of 8366 requests for a conversion rate of 47.61%. Lastly, the Instant Book feature had a conversion rate of 100% with the highest sum of bookings as well at 6693. From this, we can see that instant book has a great conversion rate, and that the Contact Me feature has a substantially lower conversion rate. 
 
+Recommendation to Product: Incentivize users to use the Instant Book feature over the Contact Me feature. 
 
-
-Variable Creation:
-
+```python
+airbnb_contact_me.ts_booking_at.value_counts().sum()
+airbnb_book_it = airbnb_data[airbnb_data['contact_channel_first'] == 'book_it']
+airbnb_book_it.ts_booking_at.value_counts().sum()
+airbnb_instant_book = airbnb_data[airbnb_data['contact_channel_first'] == 'instant_book']
+airbnb_instant_book.ts_booking_at.value_counts().sum()
+```
 
 Statistical Analyses:
 
+Our next steps for this project are to analyze the Contact Me bookings further. In our data, we have the number of interactions, and I hypothesize that the number of interactions may have statistical significance within the Contact Me feature. I believe the Contact Me feature may be a worthwhile feature despite it's low conversion rate - for example, new users to the platform may favor the feature so they can get to know the hosts and grow trust on the platform. This analysis is something worth digging into by segmenting past versus new users of the Contact Me feature, as well as to perform statistical significance tests to see if Simpson's Paradox may be happening with the Contact Me feature conversion rate. 
 
-Conclusion:
 
 
 
