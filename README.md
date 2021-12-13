@@ -265,7 +265,7 @@ plt.title('Device Type Counts')
 
 ## Bivariate Analyses
 
-Here we perform a device type by destination analysis. Macs are widely used for US bookings.  
+Here we perform a device type by destination analysis. Macs are widely used for US.  
 
 ```python
 device1_destinations = users.loc[users['first_device_type'] == 'Mac Desktop', 'country_destination'].value_counts()
@@ -282,7 +282,7 @@ plt.show()
 ![Device Type by Country Plot](https://user-images.githubusercontent.com/91219409/145722597-fecaf779-c9c6-40b9-8d45-ba48b86118a7.png)
 
 
-In the age compared to destination plot, we see that Italy and “Other” are booked more in users above the age of 50, compared to users under the age of 50. The under 50 leads almost every other destination compared to the over 50 age group.
+In the age compared to destination plot, we see that Italy and “Other” are listed as destinations more in users above the age of 50, compared to users under the age of 50. The under 50 leads almost every other destination compared to the over 50 age group.
 
 ```python
 age = 50
@@ -301,7 +301,7 @@ plt.show()
 ![Age versus destination plot](https://user-images.githubusercontent.com/91219409/145722776-f7fcf528-1976-423c-b593-bae1eaac1f7c.png)
 
 
-In the gender compared to destination plot, we see that Males book Canada more frequently than females. 
+In the gender compared to destination plot, we see that males list their destination to Canada more frequently than females do. 
 
 ```python
 women = sum(users['gender'] == 'FEMALE')
