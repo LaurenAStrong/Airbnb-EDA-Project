@@ -222,13 +222,6 @@ plt.title('Country Destination')
 After looking at the time first active variable, we see that growth is consistently positive, and takes off in 2014. 
 
 ```python
-sns.histplot(users.timestamp_first_active, color='#FD5C64')
-plt.xlabel('Timestamp First Active')
-plt.ylabel('Count')
-plt.title('First Active Over Time')
-```
-![First Active Over Time](https://user-images.githubusercontent.com/91219409/145687351-adb6b745-c5bf-4ff2-b4e6-98516e2aed88.png)
-```python
 users.date_account_created.value_counts().plot(kind='line', linewidth=1.2, color='#FD5C64')
 ```
 ![Date Account Created](https://user-images.githubusercontent.com/91219409/145687169-ef39b7b9-a5f6-42ef-a5ae-4e4237d7e9c6.png)
