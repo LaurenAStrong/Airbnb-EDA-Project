@@ -74,7 +74,7 @@ The `print` output shows:
 * first_affiliate_tracked has 6085 null values.
 * country_destination has 62096 null values.
 
-Following checking for Null values, we also check for how many unique values are in each column. For example, checking how many genders are reported, as well as how many different browsers and device types are reported. It would be helpful for marketing and product to know which device types, etc bookings are being made through.
+Following checking for null values, we also check for how many unique values are in each column. For example, checking how many genders are reported, as well as how many different browsers and device types are reported. It would be helpful for marketing and product to know which device types, etc bookings are being made through.
 
 ```python
 for i in users.columns:
@@ -86,27 +86,24 @@ for i in users.columns:
 
 The `print` output shows:
 
-* id has 275547 unique values (which is the total number of rows in our dataset)
-* date_account_created has 1726 unique values.
+* id has 275547 unique values 
 * timestamp_first_active has 275547 unique values.
-* date_first_booking has 1976 unique values.
 * gender has 4 unique values.
 * age has 145 unique values.
 * signup_method has 4 unique values.
-* signup_flow has 18 unique values.
 * language has 26 unique values.
 * affiliate_channel has 8 unique values.
 * affiliate_provider has 18 unique values.
-* first_affiliate_tracked has 7 unique values.
 * signup_app has 4 unique values.
 * first_device_type has 9 unique values.
 * first_browser has 55 unique values.
 * country_destination has 12 unique values.
 
+There are 4 genders listed, which needs exploring since we expected just female/male. 
 
 Convert to categorical for plotting:
 ```python
-categorical_features = [
+categorical_variables = [
     'affiliate_channel',
     'affiliate_provider',
     'first_affiliate_tracked',
@@ -119,20 +116,13 @@ categorical_features = [
     'signup_flow'
 ]
 
-for categorical_feature in categorical_features:
-    users[categorical_feature] = users[categorical_feature].astype('category')
+for i in categorical_variables:
+    users[i] = users[i].astype('category')
 ```
 
-Insights:
-
-* We see that the number of id’s is identical to the number of rows in our dataset.
-* There are 4 genders listed as unique indicating that taking a look at those 4 genders would be useful since more than just male/female are listed.
-* We will later take a look at the different browser and device types to see which had the best and lowest conversion rates for booking.
-* We will also take a look at which languages and countries of destination are most and least common. 
-* Date of first booking has a higher-than-average missing value count, so that will need to be further explored. My hypothesis is that most of those are because users entered into the signup flow, but did not book, thus they did not have a date of first booking to report.
 
 ## Data Cleaning
-Here, we clean gender and transform the “-unknown-“ input as well as the “OTHER” input into NaN’s:
+Here, we clean gender and transform the “-unknown-“ input as well as the “OTHER” input into nulls:
 ```python
 users.loc[users.gender == 'OTHER', 'gender'] = np.nan
 users.gender.value_counts()
@@ -144,32 +134,39 @@ We now analyze the age variable, and in particular looks at the range of extreme
 ```python
 users[users.age > 100]['age'].describe()
 ```
-* count    2690.000000
-* mean      690.957249
-* std       877.927570
-* min       101.000000
-* 25%       105.000000
-* 50%       105.000000
-* 75%      2014.000000
-* max      2014.000000
+* count    2690
+* mean      690
+* std       877
+* min       101
+* 25%       105
+* 50%       105
+* 75%      2014
+* max      2014
 
 ```python
 users[users.age <18]['age'].describe()
 ```
-* count    188.000000
-* mean      12.718085
-* std        5.764569
-* min        1.000000
-* 25%        5.000000
-* 50%       16.000000
-* 75%       17.000000
-* max       17.000000
+* count    188
+* mean      12
+* std        5
+* min        1
+* 25%        5
+* 50%       16
+* 75%       17
+* max       17
 
 
-Here, we clean the age variable to remove those outliers. Replace outlier ages with NaN. 
+Here, we clean the age variable to remove those outliers. Replace outlier ages with nulls. 
 ```python
-users.loc[airbnb_df.age > 100, 'age'] = np.nan
-users.loc[airbnb_df.age <18, 'age'] = np.nan
+users.loc[users.age > 100, 'age'] = np.nan
+users.loc[users.age <18, 'age'] = np.nan
+```
+
+Before we begin our date and time analyses, we need to convert the date and time columns to the appropriate formats, so we do so below:
+```python
+users['date_account_created'] = pd.to_datetime(users['date_account_created'])
+users['date_first_booking'] = pd.to_datetime(users['date_first_booking'])
+users['date_first_active'] = pd.to_datetime((users.timestamp_first_active // 1000000), format='%Y%m%d')
 ```
 
 
@@ -177,7 +174,7 @@ users.loc[airbnb_df.age <18, 'age'] = np.nan
 We check the spread of age, and see that outliers have indeed been eliminated. 
 
 ```python
-sns.boxplot(data=airbnb_df.age, color='#FD5C64')
+sns.boxplot(data=users.age, color='#FD5C64')
 plt.title('Age Distribution')
 ```
 ![Age Distribution Updated with title](https://user-images.githubusercontent.com/91219409/145687398-036af343-4879-418c-a8e1-04f26eba457a.png)
@@ -191,7 +188,7 @@ sns.despine()
 ![Age dist plot](https://user-images.githubusercontent.com/91219409/145686502-72239c18-3a9e-4b24-ae48-ebc9beaf9037.png)
 
 
-During the gender analysis, we see that there are more females than males, and there are about 30% NaN genders listed. 
+During the gender analysis, we see that there are more females than males, and there are about 30% null genders listed. 
 
 ```python
 plt.figure(figsize=(14,8))
@@ -213,22 +210,14 @@ In our country analysis, we see that most folks listed “NDF”/unknown as thei
 
 ```python
 plt.figure(figsize=(14,8))
-order1 = users['country_destination'].value_counts().index
-sns.countplot(data = users, x = 'country_destination', order = order1, color = '#FD5C64')
+plot_order = users['country_destination'].value_counts().index
+sns.countplot(data = users, x = 'country_destination', order = plot_order, color = '#FD5C64')
 plt.xlabel('Country Destination')
 plt.ylabel('Count')
 plt.title('Country Destination')
-order2 = users['country_destination'].value_counts()
 ```
 ![Better plot for desination country](https://user-images.githubusercontent.com/91219409/145686254-2e12d016-05fb-4566-96b6-7420769f41f8.png)
 
-
-Before we begin our date and time analyses, we need to convert the date and time columns to the appropriate formats, so we do so below:
-```python
-users['date_account_created'] = pd.to_datetime(users['date_account_created'])
-users['date_first_booking'] = pd.to_datetime(users['date_first_booking'])
-users['date_first_active'] = pd.to_datetime((users.timestamp_first_active // 1000000), format='%Y%m%d')
-```
 
 After looking at the time first active variable, we see that growth is consistently positive, and takes off in 2014. 
 
@@ -269,7 +258,6 @@ device1_destinations = users.loc[users['first_device_type'] == 'Mac Desktop', 'c
 device2_destinations = users.loc[users['first_device_type'] == 'Windows Desktop', 'country_destination'].value_counts()
 device1_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Mac Desktop', rot=0)
 device2_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Windows Desktop', rot=0)
-Bar width
 width = 0.4
 plt.legend()
 plt.xlabel('Destination Country')
@@ -285,10 +273,11 @@ In the age compared to destination plot, we see that Italy and “Other” are l
 age = 50
 less_than_50 = sum(users.loc[users['age'] < age, 'country_destination'].value_counts())
 greater_than_50 = sum(users.loc[users['age'] > age, 'country_destination'].value_counts())
-younger_destinations = users.loc[users['age'] < age, 'country_destination'].value_counts() / less_than_50 * 100
-older_destinations = users.loc[users['age'] > age, 'country_destination'].value_counts() / greater_than_50 * 100
-younger_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Age Less Than 50', rot=0)
-older_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Age Greater Than 50', rot=0)
+less_than__destinations = users.loc[users['age'] < age, 'country_destination'].value_counts() / less_than_50 * 100
+greater_than_destinations = users.loc[users['age'] > age, 'country_destination'].value_counts() / greater_than_50 * 100
+less_than_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Age Less Than 50', rot=0)
+greater_than_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Age Greater Than 50', rot=0)
+width = 0.4
 plt.legend()
 plt.xlabel('Destination Country')
 plt.ylabel('Percentage')
@@ -301,13 +290,13 @@ plt.show()
 In the gender compared to destination plot, we see that males list their destination to Canada more frequently than females do. 
 
 ```python
-women = sum(users['gender'] == 'FEMALE')
-men = sum(users['gender'] == 'MALE')
-female_destinations = users.loc[users['gender'] == 'FEMALE', 'country_destination'].value_counts() / women * 100
-male_destinations = users.loc[users['gender'] == 'MALE', 'country_destination'].value_counts() / men * 100
+f = sum(users['gender'] == 'female')
+m = sum(users['gender'] == 'male')
+female_dest = users.loc[users['gender'] == 'female', 'country_destination'].value_counts() / f * 100
+male_dest = users.loc[users['gender'] == 'male', 'country_destination'].value_counts() / m * 100
 width = 0.4
-male_destinations.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Male', rot=0)
-female_destinations.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Female', rot=0)
+male_dest.plot(kind='bar', width=width, color='#0BF77D', position=0, label='Male', rot=0)
+female_dest.plot(kind='bar', width=width, color='#FD5C64', position=1, label='Female', rot=0)
 plt.legend()
 plt.xlabel('Destination Country')
 plt.ylabel('Percentage')
