@@ -4,9 +4,9 @@
 
 # Airbnb User Bookings Analysis
 
-This repository documents the process of extracting insights from multiple Airbnb datasets, joining them on a common key, cleaning them, analyzing for insights, and presenting the results with graphs and business-impactful summaries.
+This repository documents the process of extracting insights from multiple Airbnb datasets, joining them, cleaning them, analyzing for insights, and presenting the results with graphs and business-impactful summaries.
 
-The first data is Airbnb user booking data.We use this data to perform exploratory data analysis for Airbnb, providing stakeholders with key insights about Airbnb users.
+The first data is Airbnb user booking data. We use this data to perform exploratory data analysis for Airbnb, providing stakeholders with key insights about Airbnb users.
 
 The second part of this document outlines a second dataset, from Airbnb as well. This one provides product usage data and marketing data, and we will use it to extract insights for both marketing and product.
 
