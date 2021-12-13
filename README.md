@@ -6,7 +6,9 @@
 
 This repository documents the process of extracting insights from multiple Airbnb datasets, joining them on a common key, cleaning them, analyzing for insights, and presenting the results with graphs and business-impactful summaries.
 
-The data is Airbnb user booking data from 2014 that was re-released in 2015. The data is in the data folder of this repository. 
+The first data is Airbnb user booking data from 2014 that was re-released in 2015. We use this data to perform exploratory data analysis for Airbnb, providing stakeholders with key insights about Airbnb users.
+
+The second part of this document outlines a second dataset, from Airbnb as well. This one provides product usage data and marketing data, and we will use it to extract insights for both marketing and product.
 
 ## Requirements
 
@@ -33,7 +35,7 @@ test_users.shape
 train_users.shape
 ```
 
-To get the full user dataset, we concatenate the train and test set that was presplit. We concatenate here instead of merging because we want the rows added on top of on another, and not joined by a common key, like during merging. 
+To get the full user dataset, we concatenate the train and test set that was presplit. We concatenate here instead of merging because we want the rows added on top of one another, and not joined by a common key, like during merging. 
 
 ```python
 users = pd.concat((test_users, train_users), axis = 0, ignore_index= True)
@@ -57,30 +59,6 @@ users.id.duplicated().sum()
 
 The data shows that there are no users who booked twice in this dataset.
 
-Analyze age outliers:
-```python
-users[users.age > 100]['age'].describe()
-```
-* count    2690.000000
-* mean      690.957249
-* std       877.927570
-* min       101.000000
-* 25%       105.000000
-* 50%       105.000000
-* 75%      2014.000000
-* max      2014.000000
-
-```python
-users[users.age <18]['age'].describe()
-```
-* count    188.000000
-* mean      12.718085
-* std        5.764569
-* min        1.000000
-* 25%        5.000000
-* 50%       16.000000
-* 75%       17.000000
-* max       17.000000
 
 The next step we perform is to calculate the number of null entries with a `Python` loop over the columns.
 
@@ -128,29 +106,6 @@ The `print` output shows:
 * first_browser has 55 unique values.
 * country_destination has 12 unique values.
 
-## Data Integrity – Insights
-
-* We see that the number of id’s is identical to the number of rows in our dataset.
-* There are 4 genders listed as unique indicating that taking a look at those 4 genders would be useful since more than just male/female are listed.
-* We will later take a look at the different browser and device types to see which had the best and lowest conversion rates for booking.
-* We will also take a look at which languages and countries of destination are most and least common. 
-* Date of first booking has a higher-than-average missing value count, so that will need to be further explored. My hypothesis is that most of those are because users entered into the signup flow, but did not book, thus they did not have a date of first booking to report.
-
-# Data Cleaning Needed:
-
-
-Clean gender:
-```python
-users.loc[users.gender == 'OTHER', 'gender'] = np.nan
-users.gender.value_counts()
-users.loc[users.gender == '-unknown-', 'gender'] = np.nan
-```
-Clean age:
-Replace outlier ages with NaN. 
-```python
-airbnb_df.loc[airbnb_df.age > 100, 'age'] = np.nan
-airbnb_df.loc[airbnb_df.age <15, 'age'] = np.nan
-```
 
 Convert to categorical for plotting:
 ```python
@@ -171,16 +126,66 @@ for categorical_feature in categorical_features:
     users[categorical_feature] = users[categorical_feature].astype('category')
 ```
 
+Insights:
+
+* We see that the number of id’s is identical to the number of rows in our dataset.
+* There are 4 genders listed as unique indicating that taking a look at those 4 genders would be useful since more than just male/female are listed.
+* We will later take a look at the different browser and device types to see which had the best and lowest conversion rates for booking.
+* We will also take a look at which languages and countries of destination are most and least common. 
+* Date of first booking has a higher-than-average missing value count, so that will need to be further explored. My hypothesis is that most of those are because users entered into the signup flow, but did not book, thus they did not have a date of first booking to report.
+
+## Data Cleaning
+Here, we clean gender and transform the “-unknown-“ input as well as the “OTHER” input into NaN’s:
+```python
+users.loc[users.gender == 'OTHER', 'gender'] = np.nan
+users.gender.value_counts()
+users.loc[users.gender == '-unknown-', 'gender'] = np.nan
+```
+
+We now analyze the age variable, and in particular looks at the range of extreme values for users that listed their age as above 100, and below 18 (the legal limit for booking on Airbnb). The below analyses take a look at these 2 outlier groups:
+
+```python
+users[users.age > 100]['age'].describe()
+```
+* count    2690.000000
+* mean      690.957249
+* std       877.927570
+* min       101.000000
+* 25%       105.000000
+* 50%       105.000000
+* 75%      2014.000000
+* max      2014.000000
+
+```python
+users[users.age <18]['age'].describe()
+```
+* count    188.000000
+* mean      12.718085
+* std        5.764569
+* min        1.000000
+* 25%        5.000000
+* 50%       16.000000
+* 75%       17.000000
+* max       17.000000
+
+
+Here, we clean the age variable to remove those outliers. Replace outlier ages with NaN. 
+```python
+users.loc[airbnb_df.age > 100, 'age'] = np.nan
+users.loc[airbnb_df.age <18, 'age'] = np.nan
+```
+
+
 ## Univariate Analysis – Insights
-Age boxplot: Outliers have been removed
+We check the spread of age, and see that outliers have indeed been eliminated. 
+
 ```python
 sns.boxplot(data=airbnb_df.age, color='#FD5C64')
 plt.title('Age Distribution')
 ```
 ![Age Distribution Updated with title](https://user-images.githubusercontent.com/91219409/145687398-036af343-4879-418c-a8e1-04f26eba457a.png)
 
-
-Age dist plot:
+With an age distribution plot, we see a more clear pattern of the distribution of ages. The mean is around 34.  
 ```python
 sns.distplot(users.age.dropna(), color='#FD5C64')
 plt.xlabel('Age')
@@ -189,7 +194,8 @@ sns.despine()
 ![Age dist plot](https://user-images.githubusercontent.com/91219409/145686502-72239c18-3a9e-4b24-ae48-ebc9beaf9037.png)
 
 
-Gender: more females than males. Over 30% unknown gender. 
+During the gender analysis, we see that there are more females than males, and there are about 30% NaN genders listed. 
+
 ```python
 plt.figure(figsize=(14,8))
 order1 = users['gender'].value_counts().index
@@ -206,10 +212,9 @@ for i in range(order2.shape[0]):
 ```
 ![Gender counts](https://user-images.githubusercontent.com/91219409/145686373-fbd5a757-fd92-4784-8b5c-27276e1cc60f.png)
 
+In our country analysis, we see that most folks listed “NDF”/unknown as their destination, followed by the USA.
 
-Country of destination:
 ```python
-Country: Mostly unknown, next highest is USA.
 plt.figure(figsize=(14,8))
 order1 = users['country_destination'].value_counts().index
 sns.countplot(data = users, x = 'country_destination', order = order1, color = sns.color_palette()[0])
@@ -221,14 +226,15 @@ order2 = users['country_destination'].value_counts()
 ![Better plot for desination country](https://user-images.githubusercontent.com/91219409/145686254-2e12d016-05fb-4566-96b6-7420769f41f8.png)
 
 
-Convert time and date columns into appropriate format:
+Before we begin our date and time analyses, we need to convert the date and time columns to the appropriate formats, so we do so below:
 ```python
 users['date_account_created'] = pd.to_datetime(users['date_account_created'])
 users['date_first_booking'] = pd.to_datetime(users['date_first_booking'])
 users['date_first_active'] = pd.to_datetime((users.timestamp_first_active // 1000000), format='%Y%m%d')
 ```
 
-Time first active: Steady growth until 2014, then lots of growth
+After looking at the time first active variable, we see that growth is consistently positive, and takes off in 2014. 
+
 ```python
 sns.histplot(users.timestamp_first_active, color='#FD5C64')
 plt.xlabel('Timestamp First Active')
@@ -236,15 +242,14 @@ plt.ylabel('Count')
 plt.title('First Active Over Time')
 ```
 ![First Active Over Time](https://user-images.githubusercontent.com/91219409/145687351-adb6b745-c5bf-4ff2-b4e6-98516e2aed88.png)
-
-
 ```python
 users.date_account_created.value_counts().plot(kind='line', linewidth=1.2, color='#FD5C64')
 ```
 ![Date Account Created](https://user-images.githubusercontent.com/91219409/145687169-ef39b7b9-a5f6-42ef-a5ae-4e4237d7e9c6.png)
 
 
-Devices used:
+Desktops beat out other devices by a landslide.
+
 ```python
 order1 = users['first_device_type'].value_counts().index
 sns.countplot(x='first_device_type', data=users,  order = order1, color = '#FD5C64')
@@ -258,9 +263,10 @@ plt.title('Device Type Counts')
 
 
 
-## Bivariate Analysis – Insights
+## Bivariate Analyses
 
-Device type - Destination plot:
+Here we perform a device type by destination analysis. Macs are widely used for US bookings.  
+
 ```python
 device1_destinations = users.loc[users['first_device_type'] == 'Mac Desktop', 'country_destination'].value_counts()
 device2_destinations = users.loc[users['first_device_type'] == 'Windows Desktop', 'country_destination'].value_counts()
@@ -276,7 +282,8 @@ plt.show()
 ![Device Type by Country Plot](https://user-images.githubusercontent.com/91219409/145722597-fecaf779-c9c6-40b9-8d45-ba48b86118a7.png)
 
 
-Age - Destination plot:
+In the age compared to destination plot, we see that Italy and “Other” are booked more in users above the age of 50, compared to users under the age of 50. The under 50 leads almost every other destination compared to the over 50 age group.
+
 ```python
 age = 50
 less_than_50 = sum(users.loc[users['age'] < age, 'country_destination'].value_counts())
@@ -294,7 +301,8 @@ plt.show()
 ![Age versus destination plot](https://user-images.githubusercontent.com/91219409/145722776-f7fcf528-1976-423c-b593-bae1eaac1f7c.png)
 
 
-Gender - Destination plot:
+In the gender compared to destination plot, we see that Males book Canada more frequently than females. 
+
 ```python
 women = sum(users['gender'] == 'FEMALE')
 men = sum(users['gender'] == 'MALE')
@@ -315,11 +323,8 @@ plt.show()
 
 
 
-# Part 2 - Metrics Analyses:
+# Metrics Analyses:
 
 <img width="800" alt="Screen Shot 2021-12-12 at 9 46 37 AM" src="https://user-images.githubusercontent.com/91219409/145723448-154ab13b-9004-44d9-a374-28ef76f7a87e.png">
 <img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
-
-
-
 
