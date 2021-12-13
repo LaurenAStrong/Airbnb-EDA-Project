@@ -247,6 +247,19 @@ plt.title('Device Type Counts')
 ![Device Types Plot corrected](https://user-images.githubusercontent.com/91219409/145721641-6b317916-6430-42d1-9491-75a93fab9974.png)
 
 
+Tuesdays are the most active days for users. 
+```python
+weekdays = []
+for date in users.date_account_created:
+    weekdays.append(date.weekday())
+weekdays = pd.Series(weekdays)
+
+sns.barplot(x = weekdays.value_counts().index, y=weekdays.value_counts().values, order=range(0,7))
+plt.xlabel('Week Day')
+sns.despine()
+```
+![Days of week active users](https://user-images.githubusercontent.com/91219409/145862569-871a8bae-40a1-40da-b2ef-4b0c342d98f1.png)
+
 
 
 ## Bivariate Analyses
