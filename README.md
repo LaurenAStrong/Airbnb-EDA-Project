@@ -314,3 +314,32 @@ plt.show()
 <img width="800" alt="Screen Shot 2021-12-12 at 4 23 52 PM" src="https://user-images.githubusercontent.com/91219409/145735834-03ae22d6-0b06-4399-a30d-3205d1202688.png">
 <img width="800" alt="Screen Shot 2021-12-12 at 9 44 39 AM" src="https://user-images.githubusercontent.com/91219409/145723400-4f1c9e57-2da6-4ae2-80b0-0d748ccc906e.png">
 
+
+
+Preliminary Insights:
+
+Contact Method Chart:
+
+```python
+airbnb_data.contact_channel_first.value_counts(dropna=False).plot(kind='bar', color='#FD5C64', rot=0)
+plt.xlabel('Contact Method')
+sns.despine()
+```
+![Contact method plot](https://user-images.githubusercontent.com/91219409/145860282-7cc1e7ea-7b4e-464a-8714-5607515ce658.png)
+
+
+
+
+Variable Creation:
+
+
+Statistical Analyses:
+
+
+Conclusion:
+
+
+
+
+
+
